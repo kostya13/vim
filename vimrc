@@ -1,9 +1,6 @@
 "*** Установка конфига и Vundle:
-" mkdir ~/.vim
-" cp vimrc ~/.vim/
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-"* Установка из командной строки
-" vim +PluginInstall +qall
+"git clone https://bitbucket.org/kostya13/vim.git ~/.vim
+"~/.vim/install_vundle
 
 "syn on
 "set noerrorbells visualbell t_vb=

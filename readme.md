@@ -1,10 +1,6 @@
 ### Prepare ###
-mkdir ~/.vim
-
-cp vimrc ~/.vim/
+git clone https://bitbucket.org/kostya13/vim.git ~/.vim
 
 ### Install Vundle ###
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+~/.vim/install_vundle
 
-### Install plugin from command line: ###
-vim +PluginInstall +qall
