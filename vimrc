@@ -1,3 +1,10 @@
+"*** Установка конфига и Vundle:
+" mkdir ~/.vim
+" cp vimrc ~/.vim/
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"* Установка из командной строки
+" vim +PluginInstall +qall
+
 "syn on
 "set noerrorbells visualbell t_vb=
 "if has('autocmd')
