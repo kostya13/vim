@@ -1,5 +1,6 @@
 ### Prepare ###
 mkdir ~/.vim
+
 cp vimrc ~/.vim/
 
 ### Install Vundle ###
