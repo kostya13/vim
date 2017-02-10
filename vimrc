@@ -254,7 +254,7 @@ let NERDTreeShowBookmarks=1
 
 set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
-nnoremap <S-F12> :b <C-Z>
+nnoremap <S-F12> :b 
 nnoremap <F12> :BufExplorer<CR>
 inoremap <F12> <ESC>:BufExplorer<CR>
 map <F2> :w<CR>
@@ -286,3 +286,4 @@ map <Leader>- ct_
 map <Leader>o o<ESC>
 map <Leader>O O<ESC>
 map <Leader>h :nohl<CR>
+nnoremap L i<CR><Esc>
