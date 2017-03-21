@@ -151,8 +151,6 @@ let g:netrw_list_hide= '.*\.swp$,.*\.pyc'
 " TaskList настройки
 "map <F2> :TaskList<CR>     " отобразить список тасков на F2
 
-" Работа буфферами
-map <C-q> :bd<CR>      " CTRL+Q - закрыть текущий буффер
  
 "Перед сохранением вырезаем пробелы на концах (только в .py файлах)
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
@@ -254,9 +252,10 @@ let NERDTreeShowBookmarks=1
 
 set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
-nnoremap <S-F12> :b 
 nnoremap <F12> :BufExplorer<CR>
 inoremap <F12> <ESC>:BufExplorer<CR>
+nnoremap <S-F12> :Unite -start-insert buffer<CR>
+inoremap <S-F12> <ESC>:Unite -start-insert buffer<CR>
 map <F2> :w<CR>
 imap <F2> <ESC>:w<CR>i
 imap <F6> <ESC><C-w>w
@@ -286,4 +285,12 @@ map <Leader>- ct_
 map <Leader>o o<ESC>
 map <Leader>O O<ESC>
 map <Leader>h :nohl<CR>
-nnoremap L i<CR><Esc>
+nnoremap K i<CR><Esc>
+let g:unite_enable_start_insert=1
+
+"set keymap=russian-jcukenwin
+"set iminsert=0
+"set imsearch=0
+"highlight lCursor guifg=NONE guibg=Cyan
+
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
