@@ -1,52 +1,44 @@
 "*** Установка конфига и Vundle:
 "git clone https://bitbucket.org/kostya13/vim.git ~/.vim
-"~/.vim/install_vundle
+"~/.vim/install_plug
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set rtp+=~/.vim
-"=====================================================
-" Vundle settings
-"=====================================================
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'      " let Vundle manage Vundle, required
-Plugin 'Shougo/unite.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'vim-scripts/occur.vim'
-Plugin 'majutsushi/tagbar'              " Class/module browser
-Plugin 'tpope/vim-surround'     " Parentheses, brackets, quotes, XML tags, and more
-Plugin 'rking/ag.vim'
+call plug#begin('~/.vim/plugged')
+
+Plug 'gmarik/Vundle.vim'      " let Vundle manage Vundle, required
+Plug 'scrooloose/nerdcommenter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dyng/ctrlsf.vim'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'vim-scripts/occur.vim'
+Plug 'majutsushi/tagbar'              " Class/module browser
+Plug 'tpope/vim-surround'     " Parentheses, brackets, quotes, XML tags, and more
+Plug 'rking/ag.vim'
+Plug 'terryma/vim-multiple-cursors'
 "---------=== Code/project navigation ===-------------
-Plugin 'scrooloose/nerdtree'            " Project and file navigation
-Plugin 'tpope/vim-fugitive'
-Plugin 'bling/vim-airline'              " Lean & mean status/tabline for vim
-"Plugin 'fisadev/FixedTaskList.vim'      " Pending tasks list
-Plugin 'rosenfeld/conque-term'          " Consoles as buffers
+Plug 'tpope/vim-fugitive'
+Plug 'bling/vim-airline'              " Lean & mean status/tabline for vim
+"Plug 'fisadev/FixedTaskList.vim'      " Pending tasks list
+Plug 'rosenfeld/conque-term'          " Consoles as buffers
 
 "--------------=== Snippets support ===---------------
-Plugin 'garbas/vim-snipmate'        " Snippets manager
-Plugin 'MarcWeber/vim-addon-mw-utils'   " dependencies #1
-Plugin 'tomtom/tlib_vim'        " dependencies #2
-Plugin 'honza/vim-snippets'     " snippets repo
-
+Plug 'SirVer/ultisnips'
+"Plug 'garbas/vim-snipmate'        " Snippets manager
+"Plug 'MarcWeber/vim-addon-mw-utils'   " dependencies #1
+"Plug 'tomtom/tlib_vim'        " dependencies #2
+Plug 'honza/vim-snippets'     " snippets repo
 "---------------=== Languages support ===-------------
 " --- Python ---
-Plugin 'klen/python-mode'           " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
-Plugin 'davidhalter/jedi-vim'       " Jedi-vim autocomplete plugin
+Plug 'klen/python-mode'           " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
+Plug 'davidhalter/jedi-vim'       " Jedi-vim autocomplete plugin
+call plug#end()
 
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'ctrlpvim/ctrlp.vim'
-
-call vundle#end()                   " required
-
-filetype on
-filetype plugin on
-filetype plugin indent on
+"=====================================================
+" Пути к плагинам, установленным вручную
+set rtp+=~/.vim/plugins/nerdtree
 
 "=====================================================
 " General settings
@@ -64,7 +56,7 @@ set ttyfast
 set cursorline
 
 " включить подсветку кода
-syntax off
+syntax on
 
 if has("gui_running")
 " GUI? устаналиваем тему и размер окна
@@ -119,7 +111,7 @@ let g:tagbar_compact = 1
 " NerdTree настройки
 " показать NERDTree на F3
 map <F3> :NERDTreeToggle<CR>
-map <S-F3> :NERDTreeFind<CR>
+map <S-F3> :CtrlPRoot<CR>
 "игноррируемые файлы с расширениями
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
 let g:netrw_list_hide= '.*\.swp$,.*\.pyc'
@@ -187,11 +179,6 @@ autocmd FileType python map <buffer> <leader>8 :PymodeLint<CR>
 " автокомплит через <Ctrl+Space>
 inoremap <C-space> <C-x><C-o>
 
-" переключение между синтаксисами
-nnoremap <leader>Tp :set ft=python<CR>
-nnoremap <leader>Tj :set ft=javascript<CR>
-nnoremap <leader>Tc :set ft=css<CR>
-nnoremap <leader>Td :set ft=django<CR>
 
 "=====================================================
 " Languages support
@@ -205,7 +192,6 @@ autocmd FileType pyrex setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 s
 
 
 set fileencodings=utf8,cp1251 " Возможные кодировки файлов, если файл не в unicode кодировке, то будет использоваться cp1251
-let g:tagbar_compact = 1
 let NERDTreeShowBookmarks=1
 
 set wildchar=<Tab> wildmenu wildmode=full
@@ -213,8 +199,8 @@ set wildcharm=<C-Z>
 
 nnoremap <F12> :BufExplorer<CR>
 inoremap <F12> <ESC>:BufExplorer<CR>
-nnoremap <S-F12> :Unite -start-insert buffer<CR>
-inoremap <S-F12> <ESC>:Unite -start-insert buffer<CR>
+nnoremap <S-F12> :CtrlPBuffer<CR>
+inoremap <S-F12> <ESC>:CtrlPBuffer<CR>
 map <F2> :w<CR>
 imap <F2> <ESC>:w<CR>i
 imap <F6> <ESC><C-w>w
@@ -223,7 +209,6 @@ let g:airline#extensions#tabline#enabled = 0
 set autoread
 " diff win saved version
 map <F8> :w !diff % - <CR>
-" let g:netrw_home = 'D:\\home\\kostya\\.vim'
 set autochdir
 map <Leader>b iimport pdb;pdb.set_trace()<ESC>
 set makeprg=flake8
@@ -248,8 +233,6 @@ map <Leader>k i<CR><Esc>==
 map <Leader>f !../../tests/formatcsv.py "%"
 map <Leader>' ysiw'
 
-let g:unite_enable_start_insert=1
-
 "set keymap=russian-jcukenwin
 "set iminsert=0
 "set imsearch=0
@@ -258,3 +241,21 @@ let g:unite_enable_start_insert=1
 set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
 
 set background=light
+let g:ctrlp_by_filename = 1
+
+"let g:ctrlp_custom_ignore = {'file': '\v(\.py|\.sql)@<!$'}
+
+set wildignore=*.pyc
+
+" Хоткеи для Git
+map <Leader>gs :Gstatus<CR>
+map <Leader>gc :Git checkout
+map <Leader>gcc :Gcommit<CR>
+map <Leader>gd :Gdiff<CR>
+map <Leader>gdo :diffoff<CR>
+map <Leader>gp :Gpush<CR>
+
+" Set ultisnips triggers
+let g:UltiSnipsExpandTrigger="<tab>"                                            
+let g:UltiSnipsJumpForwardTrigger="<tab>"                                       
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
