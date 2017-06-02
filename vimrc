@@ -94,10 +94,6 @@ set noswapfile       " no swap files
 set smarttab
 set tabstop=4
 
-
-" указываем каталог с настройками SnipMate
-let g:snippets_dir = "~/.vim/vim-snippets/snippets"
-
 " настройки Vim-Airline
 set laststatus=2
 
@@ -110,8 +106,8 @@ let g:tagbar_compact = 1
 
 " NerdTree настройки
 " показать NERDTree на F3
-map <F3> :NERDTreeToggle<CR>
-map <S-F3> :CtrlPRoot<CR>
+map <S-F3> :NERDTreeToggle<CR>
+map <F3> :CtrlPRoot<CR>
 "игноррируемые файлы с расширениями
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
 let g:netrw_list_hide= '.*\.swp$,.*\.pyc'
@@ -197,10 +193,10 @@ let NERDTreeShowBookmarks=1
 set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
 
-nnoremap <F12> :BufExplorer<CR>
-inoremap <F12> <ESC>:BufExplorer<CR>
-nnoremap <S-F12> :CtrlPBuffer<CR>
-inoremap <S-F12> <ESC>:CtrlPBuffer<CR>
+nnoremap <S-F12> :BufExplorer<CR>
+inoremap <S-F12> <ESC>:BufExplorer<CR>
+nnoremap <F12> :CtrlPBuffer<CR>
+inoremap <F12> <ESC>:CtrlPBuffer<CR>
 map <F2> :w<CR>
 imap <F2> <ESC>:w<CR>i
 imap <F6> <ESC><C-w>w
@@ -255,7 +251,13 @@ map <Leader>gd :Gdiff<CR>
 map <Leader>gdo :diffoff<CR>
 map <Leader>gp :Gpush<CR>
 
-" Set ultisnips triggers
+" Хоткеи CtrlSF
+map <Leader>s :CtrlSF 
+map <Leader>ss :CtrlSF <CR>
+map <Leader>sq :CtrlSFQuickfix 
+ 
+" Настройки ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"                                            
 let g:UltiSnipsJumpForwardTrigger="<tab>"                                       
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
