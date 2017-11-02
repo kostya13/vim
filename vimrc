@@ -32,7 +32,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'     " snippets repo
 "---------------=== Languages support ===-------------
 " --- Python ---
-Plug 'klen/python-mode'           " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
+Plug 'python-mode/python-mode'           " Python mode (docs, refactor, lints, highlighting, run and ipdb and more)
 Plug 'davidhalter/jedi-vim'       " Jedi-vim autocomplete plugin
 call plug#end()
 
@@ -131,7 +131,7 @@ let g:pymode_doc = 1
 let g:pymode_doc_key = 'K'
 " проверка кода
 let g:pymode_lint = 1
-let g:pymode_lint_checker = ['pyflakes' , 'pep8']
+let g:pymode_lint_checker = ['pyflakes', 'pep8']
 "let g:pymode_lint_ignore="E501,W601,C0110"
 " провека кода после сохранения
 let g:pymode_lint_write = 1
@@ -261,3 +261,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"                                       
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+
+" 
+map <S-F4> :CtrlPBufTag<CR>
