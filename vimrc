@@ -2,6 +2,7 @@
 " Настройки папок с плагинами
 "=====================================================
 call plug#begin('~/.vim/plugged')
+Plug 'altercation/vim-colors-solarized'
 Plug 'SirVer/ultisnips'
 Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
@@ -12,7 +13,16 @@ Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'rbong/vim-flog'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'posva/vim-vue'
+"Plug 'nathanaelkane/vim-indent-guides'
+Plug 'thaerkh/vim-indentguides'
+Plug 'nvie/vim-flake8'
+"Plug 'rakr/vim-one'
+"Plug 'vim-scripts/summerfruit256.vim'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
 "set rtp+=~/.vim
@@ -50,10 +60,10 @@ set gcr=a:blinkon0
 set ttyfast
 "set cursorline
 
-tab sball
+"tab sball
 set switchbuf=useopen
 
-" отключаем пищалку и мигание
+"" отключаем пищалку и мигание
 set visualbell t_vb=
 set novisualbell
 
@@ -64,6 +74,9 @@ set hlsearch         " подсветка результатов поиска
 set nu               " показывать номера строк
 set scrolloff=3      " 5 строк при скролле за раз
 
+
+set smartindent 
+
 " отключаем бэкапы и своп-файлы
 set nobackup         " no backup files
 set nowritebackup    " only in case you don't want a backup file while editing
@@ -71,9 +84,12 @@ set noswapfile       " no swap files
 
 " настройка на Tab
 set smarttab
+set expandtab 
 set tabstop=4
+set shiftwidth=4 
+set tabstop=4 
+set softtabstop=4 
 
-set shiftwidth=2
 set laststatus=2
 
 set autoread
@@ -84,15 +100,18 @@ set wildchar=<Tab> wildmenu wildmode=full
 set wildcharm=<C-Z>
 set hidden
 set smartcase
-"set keymap=russian-jcukenwin
-"set iminsert=0
-"set imsearch=0
-"highlight lCursor guifg=NONE guibg=Cyan
-set background=dark
-"set background=light
+set keymap=russian-jcukenwin
+set iminsert=0
+set imsearch=0
+highlight lCursor guifg=NONE guibg=Cyan
 
-colorscheme myindustry
+"colorscheme morning
+set background=light
+colorscheme solarized8_high
+"colorscheme onehalflight
+"colorscheme myindustry
 "colorscheme wombat
+"set background=dark
 
 if has("gui_running")
 " GUI? устаналиваем тему и размер окна
@@ -105,10 +124,10 @@ if has("gui_running")
   "simalt ~x
   set cursorline
 endif
-"=====================================================
-" Настройки плагинов
-"=====================================================
-""" TagBar
+""=====================================================
+"" Настройки плагинов
+""=====================================================
+"""" TagBar
 let g:tagbar_autofocus = 1 " автофокус на Tagbar при открытии
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 1
@@ -126,10 +145,12 @@ let NERDTreeShowBookmarks=1
 let g:pymode_trim_whitespaces = 1
 " отключаем автокомплит по коду (у нас вместо него используется jedi-vim)
 let g:pymode_rope = 1
+let g:pymode_rope_lookup_project = 0
 let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_regenerate_on_write = 0
 " документация
-let g:pymode_doc = 1
+let g:pymode_doc = 0
 let g:pymode_doc_key = 'K'
 " проверка кода
 let g:pymode_lint = 1
@@ -158,12 +179,12 @@ let g:jedi#show_call_signatures = 2
 
 " CtrlSF
 let g:ctrlsf_default_root = 'project'
-let g:ctrlp_root_markers = ['.ropeproject']
 
 " CtrlP
 let g:ctrlp_by_filename = 1
 "let g:ctrlp_custom_ignore = {'file': '\v(\.py|\.sql)@<!$',
 let g:ctrlp_custom_ignore = {'dir': 'pypy3'}
+let g:ctrlp_root_markers = ['.git']
  
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"                                            
@@ -189,6 +210,8 @@ autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
+autocmd FileType python map <buffer> <F11> :call flake8#Flake8()<CR>
+
 "=====================================================
 " Горячие главиши
 "=====================================================
@@ -210,11 +233,11 @@ map <Leader>gc :Git checkout
 map <Leader>gcc :Gcommit<CR>
 map <Leader>gd :Gdiff<CR>
 map <Leader>gdo :diffoff<CR>
-map <Leader>gp :Gpush<CR>
+map <Leader>gp :Git push --set-upstream<CR>
 
 "  Просмотр файлов
 map <Leader><F3> :NERDTreeToggle<CR>
-map <F3> :CtrlPRoot<CR>
+map <F3> :CtrlP<CR>
 
 " Просмотр буферов
 nnoremap <F12> :CtrlPBuffer<CR>
@@ -241,3 +264,20 @@ map <Leader>' ysiw'
 " diff win saved version
 map <F8> :w !diff % - <CR>
 
+
+
+" rsync -av scripts fix@10.50.1.65:/sd/fix/epam-test/upload/
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=darkgrey
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+
+let g:indentguides_spacechar = '┆'
+let g:indentguides_toggleListMode = 0
+highlight Conceal ctermfg=253
+let g:indentguides_conceal_color = get(g:, 'indentguides_conceal_color', 'ctermfg=253 ctermbg=NONE guifg=Grey27 guibg=NONE')
+set nolist
+"command -nargs=* Glg Git! log --all --graph --pretty=format:'\%h - (\%ad)\%d \%s <\%an>' --abbrev-commit --date=local <args>
+" let g:flog_default_arguments = {'all': v:true}
